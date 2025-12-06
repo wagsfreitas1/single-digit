@@ -1,8 +1,11 @@
-package org.wagner.single_digit.model;
+package org.wagner.single_digit.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,9 +21,17 @@ public class User {
 
     private String email;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SingleDigit> singleDigits = new ArrayList<>();
+
     public void updateFrom(User user) {
         setName(user.getName());
         setEmail(user.getEmail());
+    }
+
+    public void addSingleDigit(SingleDigit singleDigit) {
+        singleDigits.add(singleDigit);
+        singleDigit.setUser(this);
     }
 
 }

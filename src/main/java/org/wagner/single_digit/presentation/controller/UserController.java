@@ -1,10 +1,11 @@
-package org.wagner.single_digit.controller;
+package org.wagner.single_digit.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.wagner.single_digit.model.User;
-import org.wagner.single_digit.service.UserService;
+import org.wagner.single_digit.application.service.UserService;
+import org.wagner.single_digit.presentation.dto.UserRequest;
+import org.wagner.single_digit.presentation.dto.UserResponse;
 
 import java.util.List;
 
@@ -16,24 +17,24 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> findAll() {
+    public List<UserResponse> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User findById(@PathVariable Integer id) {
+    public UserResponse findById(@PathVariable Integer id) {
         return userService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody User user) {
-        return userService.save(user);
+    public UserResponse create(@RequestBody UserRequest userRequest) {
+        return userService.save(userRequest);
     }
 
     @PutMapping("/{id}")
-    public User modify(@PathVariable Integer id, @RequestBody User user) {
-        return userService.modify(id, user);
+    public UserResponse modify(@PathVariable Integer id, @RequestBody UserRequest userRequest) {
+        return userService.modify(id, userRequest);
     }
 
     @DeleteMapping("/{id}")

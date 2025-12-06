@@ -1,4 +1,4 @@
-package org.wagner.single_digit.exception;
+package org.wagner.single_digit.presentation.exception;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
