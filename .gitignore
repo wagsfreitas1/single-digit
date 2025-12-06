@@ -38,3 +38,6 @@ out/
 
 ### Cursor ###
 .cursorrules
+
+# macOS
+.DS_Store
