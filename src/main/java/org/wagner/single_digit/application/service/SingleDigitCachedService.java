@@ -7,16 +7,24 @@ import org.springframework.stereotype.Service;
 import org.wagner.single_digit.presentation.dto.SingleDigitRequest;
 import org.wagner.single_digit.presentation.dto.SingleDigitResponse;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Primary
 public class SingleDigitCachedService implements SingleDigitService {
 
     private final SingleDigitService delegate;
-    private static final Map<String, Integer> cachedList = new ConcurrentHashMap<>();
+    private static final int MAX_SIZE = 10;
+    private final Map<String, Integer> cachedList = Collections.synchronizedMap(
+            new LinkedHashMap<>() {
+                @Override
+                protected boolean removeEldestEntry(Map.Entry<String, Integer> eldest) {
+                    return size() > MAX_SIZE;
+                }
+            });
 
     public SingleDigitCachedService(@Qualifier("singleDigitServiceImpl") SingleDigitService delegate) {
         this.delegate = delegate;
@@ -24,9 +32,10 @@ public class SingleDigitCachedService implements SingleDigitService {
 
     @Override
     public Integer calculate(SingleDigitRequest request) {
-
-        return cachedList
-                .computeIfAbsent(request.toString(), key -> delegate.calculate(request));
+        synchronized (cachedList) {
+            return cachedList
+                    .computeIfAbsent(request.toString(), key -> delegate.calculate(request));
+        }
     }
 
     @Override
