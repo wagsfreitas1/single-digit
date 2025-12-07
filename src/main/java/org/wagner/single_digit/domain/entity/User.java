@@ -21,6 +21,9 @@ public class User {
 
     private String email;
 
+    @Column(length = 512)
+    private String publicKey;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SingleDigit> singleDigits = new ArrayList<>();
 

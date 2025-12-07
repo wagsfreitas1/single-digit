@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.wagner.single_digit.application.service.UserService;
+import org.wagner.single_digit.presentation.dto.UserPatchRequest;
 import org.wagner.single_digit.presentation.dto.UserRequest;
 import org.wagner.single_digit.presentation.dto.UserResponse;
 
@@ -41,5 +42,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Integer id) {
         userService.deleteById(id);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Integer id, @RequestBody UserPatchRequest userPatchRequest) {
+        userService.updatePublicKey(id, userPatchRequest);
     }
 }
