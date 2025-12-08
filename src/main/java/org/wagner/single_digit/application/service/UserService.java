@@ -9,6 +9,7 @@ import org.wagner.single_digit.presentation.dto.UserResponse;
 import java.util.List;
 
 public interface UserService {
+
     List<UserResponse> findAll();
 
     UserResponse findById(Integer id);
