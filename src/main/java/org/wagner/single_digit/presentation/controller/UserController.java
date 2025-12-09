@@ -46,7 +46,7 @@ public class UserController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @RequestBody UserPatchRequest userPatchRequest) {
+    public void updatePublicKey(@PathVariable Integer id, @RequestBody UserPatchRequest userPatchRequest) {
         userService.updatePublicKey(id, userPatchRequest);
     }
 }

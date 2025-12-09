@@ -1,0 +1,9 @@
+-- Test data for users
+-- IDs are explicitly defined to facilitate testing
+-- We don't insert single_digits here as they will be created by tests
+
+INSERT INTO users (id, name, email, public_key) VALUES
+    (1, 'João Silva', 'joao@email.com', NULL),
+    (2, 'Maria Santos', 'maria@email.com', NULL),
+    (3, 'Pedro Costa', 'pedro@email.com', 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArPLMmBhJZmGDAf6WVAsX8UaVSYoYrHRXfZLrRywJdqPKD4TWgHMCU6EJpjz7bLlKH7wfM5wjjwYYqSO6Y1CkwgmhAzDYZPfmV0RBXnAIeLqXnS6QkC3FJv8qVjHJnkZtAqdQEYf4D9HnP1wfqDZRnPgp6A1yJPcluYoLlXuI5JqmCLJCoxDg6PYfGzhPKbPrMKaDw1kzJZbjnHmSsWm4LijA8hvPsapYm6rJpHkMvFB4J8fCKzFKlYT9BhJhzqVi8bpqNi14OpyCzK0G0t1PDWV5L8fJmunNgHi9GfIgzwYi76xYi7gJYsJAZHv4L1j3h/B6V9kF8D+h/q2p/q/FNwIDAQAB');
+
